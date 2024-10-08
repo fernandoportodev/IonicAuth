@@ -1,8 +1,10 @@
 <ion-content [fullscreen]="true">
-  <ion-img src="assets/bg.png" />
-  <ion-title>Explore o mundo</ion-title>
+  <div class="container">
+    <ion-img src="assets/bg.png" />
+    <ion-title>Explore o mundo</ion-title>
+  </div>
   <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 30px;">
-    <ion-fab-button>
+    <ion-fab-button [routerLink]="['/login']">
       <ion-icon name="chevron-forward"> </ion-icon>
     </ion-fab-button>
   </ion-fab>
