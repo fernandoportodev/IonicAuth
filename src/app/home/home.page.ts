@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from '../authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +8,27 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
-  constructor() {}
-
+  email: any;
+  constructor(
+    public authService: AuthenticationService,
+    public route: Router
+  ) {}
+  ngOnInit(): void {
+    this.authService
+      .getProfile()
+      .then((user) => {
+        this.email = user?.email;
+        console.log(user?.email);
+      })
+      .catch((error) => {
+        console.error('Erro ao encontrar o Perfil:', error);
+      });
+  }
+  async logout() {
+    this.authService
+      .signOut()
+      .then(() => {
+        this.route.navigate(['/landing']);
+      })
+  }
 }
